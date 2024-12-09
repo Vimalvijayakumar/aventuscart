@@ -46,7 +46,7 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  factory UserModel.fromMap(dynamic map) {
     return UserModel(
       userId: map['userId'] != null ? map['userId'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,

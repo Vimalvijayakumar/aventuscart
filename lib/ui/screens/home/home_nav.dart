@@ -4,6 +4,7 @@ import 'package:cart/ui/screens/cart/cart_cubit.dart';
 import 'package:cart/ui/screens/home/home.dart';
 import 'package:cart/ui/screens/home/home_cubit.dart';
 import 'package:cart/ui/screens/profile/profile.dart';
+import 'package:cart/ui/screens/profile/profile_cubit.dart';
 import 'package:cart/ui/screens/wishlist/wishlist.dart';
 import 'package:cart/ui/screens/wishlist/wishlist_cubit.dart';
 import 'package:cart/utils/colors.dart';
@@ -51,7 +52,10 @@ class _HomeNavigationState extends State<HomeNavigation> {
         );
         break;
       case 3:
-        return ProfileScreen();
+        return BlocProvider(
+          create: (context) => ProfileCubit(CartRepository())..getprofile(),
+          child: ProfileScreen(),
+        );
         break;
 
       default:
@@ -85,12 +89,14 @@ class _HomeNavigationState extends State<HomeNavigation> {
         endDrawerEnableOpenDragGesture: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
+          centerTitle: true,
           automaticallyImplyLeading: false,
           forceMaterialTransparency: true,
           scrolledUnderElevation: 0,
           toolbarHeight: 80,
           title: Text(
-            "Aventus Cart",
+            // "Aventus Cart",
+            "cart",
             style: TextStyle(
                 color: Appcolors.primarycolor,
                 fontSize: 24,

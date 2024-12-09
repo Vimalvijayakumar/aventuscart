@@ -32,10 +32,14 @@ class _SplashScreenState extends State<SplashScreen> {
                     )),
             (route) => false);
       } else {
-        BlocProvider(
-          create: (context) => LoginCubit(CartRepository()),
-          child: LoginScreen(),
-        );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                      create: (context) => LoginCubit(CartRepository()),
+                      child: LoginScreen(),
+                    )),
+            (route) => false);
       }
     });
   }

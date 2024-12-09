@@ -58,7 +58,9 @@ class CartRepository {
 
   Future<List<CartModel>> getCartList() async {
     List<CartModel> cartList = [];
-    QuerySnapshot data = await cart.get();
+    QuerySnapshot data = await cart
+        .where("userId", isEqualTo: authInstance.currentUser?.uid.toString())
+        .get();
     if (data.docs.isNotEmpty) {
       cartList = data.docs.map((e) => CartModel.fromMap(e.data())).toList();
     }
@@ -96,6 +98,27 @@ class CartRepository {
     if (data.docs.isNotEmpty) {
       var id = data.docs.first.id;
       cart.doc(id).delete();
+    }
+  }
+
+  Future<UserModel> fetchUserData() async {
+    UserModel userdata = UserModel();
+    QuerySnapshot data = await users
+        .where("userId", isEqualTo: authInstance.currentUser?.uid.toString())
+        .get();
+    if (data.docs.isNotEmpty) {
+      userdata = UserModel.fromMap(data.docs.first);
+    }
+    return userdata;
+  }
+
+  Future<void> updateUserAddress(String address) async {
+    QuerySnapshot data = await users
+        .where("userId", isEqualTo: authInstance.currentUser?.uid.toString())
+        .get();
+    if (data.docs.isNotEmpty) {
+      var id = data.docs.first.id;
+      users.doc(id).update({"address": address.toString()});
     }
   }
 }

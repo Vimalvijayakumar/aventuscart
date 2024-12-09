@@ -32,7 +32,7 @@ class CartCubit extends Cubit<CartState> {
     emit(CartLoading());
     try {
       await _repository.deleteCartItem(item);
-      emit(CartDeleteItemSuccess());
+      getcart();
     } catch (e) {
       emit(CartFailure(e.toString()));
     }

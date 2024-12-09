@@ -19,11 +19,25 @@ class WishlistCubit extends Cubit<WishlistState> {
         emit(WishlistSuccess([]));
       } else {
         var productlist = await _repository.getProductList();
-        var wishlist =
-            productlist.map((e) => wishlistItemId.contains(e.id.toString()));
+        var wishlist = productlist
+            .where((e) => wishlistItemId.contains(e.id.toString()))
+            .toList();
         print(wishlist);
-        emit(WishlistSuccess(productlist));
+        emit(WishlistSuccess(wishlist));
       }
+    } catch (e) {
+      emit(WishlistFailure(e.toString()));
+    }
+  }
+
+  void removeWishlist(String id) async {
+    emit(WishlistLoading());
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final List<String>? wishlistItemId = prefs.getStringList('favitems');
+      wishlistItemId!.remove(id);
+      await prefs.setStringList('favitems', wishlistItemId);
+      getProductList();
     } catch (e) {
       emit(WishlistFailure(e.toString()));
     }
