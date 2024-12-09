@@ -67,10 +67,13 @@ class ProfileScreen extends StatelessWidget {
                               userdata.name.toString(),
                               softWrap: true,
                               style: TextStyle(
-                                  color: Appcolors.primarycolor,
+                                  color: Appcolors.textColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.sp),
                             ),
+                          ),
+                          SizedBox(
+                            height: 5,
                           ),
                           userdata.mobileNo == null
                               ? SizedBox()
@@ -85,6 +88,9 @@ class ProfileScreen extends StatelessWidget {
                                         fontSize: 16.sp),
                                   ),
                                 ),
+                          SizedBox(
+                            height: 5,
+                          ),
                           SizedBox(
                             width: 60.w,
                             child: Text(

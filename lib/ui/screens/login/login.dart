@@ -42,7 +42,17 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "SIGN IN",
+                    "Aventus Cart",
+                    style: TextStyle(
+                        color: Appcolors.primarycolor,
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: screensize.height * 0.05,
+                  ),
+                  Text(
+                    "Hi, Welcome back ",
                     style:
                         TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                   ),

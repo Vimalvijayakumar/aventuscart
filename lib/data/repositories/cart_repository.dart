@@ -37,6 +37,11 @@ class CartRepository {
     }
   }
 
+  Future<void> signOut() async {
+    await googleSignIn.signOut();
+    await authInstance.signOut();
+  }
+
   Future<void> addUser(UserModel user) {
     var res;
     try {

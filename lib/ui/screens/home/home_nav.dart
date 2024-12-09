@@ -1,4 +1,5 @@
 import 'package:cart/data/repositories/cart_repository.dart';
+import 'package:cart/ui/common_widgets/logout_popup_widget.dart';
 import 'package:cart/ui/screens/cart/cart.dart';
 import 'package:cart/ui/screens/cart/cart_cubit.dart';
 import 'package:cart/ui/screens/home/home.dart';
@@ -95,13 +96,27 @@ class _HomeNavigationState extends State<HomeNavigation> {
           scrolledUnderElevation: 0,
           toolbarHeight: 80,
           title: Text(
-            // "Aventus Cart",
-            "cart",
+            "Aventus Cart",
             style: TextStyle(
                 color: Appcolors.primarycolor,
                 fontSize: 24,
                 fontWeight: FontWeight.bold),
           ),
+          actions: [
+            InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return LogoutPopUp();
+                    },
+                  );
+                },
+                child: Icon(Icons.logout)),
+            SizedBox(
+              width: 20,
+            )
+          ],
         ),
         body: navigationPages(_selectedIndex),
         bottomNavigationBar: new Theme(
